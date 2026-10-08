@@ -15,12 +15,12 @@ def guess(oldNum, playerGuess):
     print("New Number is ", newNum)
 
     if(oldNum > newNum):
-        if playerGuess == "L":
+        if playerGuess == "L" or playerGuess == "l":
             return True, newNum
         else:
             return False, newNum
     else:
-        if playerGuess == "H":
+        if playerGuess == "H" or playerGuess == "h":
             return True, newNum
         else:
             return False, newNum
