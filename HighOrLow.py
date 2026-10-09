@@ -12,6 +12,9 @@ def inputValidation():
 
 def guess(oldNum, playerGuess):
     newNum = random.randint(0,100)
+    while newNum == oldNum:
+        newNum = random.randint()
+
     print("New Number is ", newNum)
 
     if(oldNum > newNum):
@@ -24,8 +27,6 @@ def guess(oldNum, playerGuess):
             return True, newNum
         else:
             return False, newNum
-    else:
-        return True, newNum
 
 def streakCounter(streak, guessRight):
     if guessRight:
