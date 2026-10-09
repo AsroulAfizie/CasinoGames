@@ -6,7 +6,7 @@ def inputValidation():
         playerGuess = input("Guess High - H or Low - L : ")
 
         if playerGuess not in allowedAnswer:
-            print("Please Valid Answer [ H, h, L, l]")
+            print("Please Valid Answer [H, h, L, l]")
         else:
             return playerGuess
 
@@ -42,8 +42,6 @@ while(cont):
     playerGuess = inputValidation()
     cont, oldNum = guess(oldNum, playerGuess)
     streak = streakCounter(streak, cont)
-    
-
 
 print("Your Streak is ", streak)
 print("Thank You for Playing The Game")
