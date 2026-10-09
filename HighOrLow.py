@@ -19,19 +19,31 @@ def guess(oldNum, playerGuess):
             return True, newNum
         else:
             return False, newNum
-    else:
+    elif(oldNum < newNum):
         if playerGuess == "H" or playerGuess == "h":
             return True, newNum
         else:
             return False, newNum
+    else:
+        return True, newNum
+
+def streakCounter(streak, guessRight):
+    if guessRight:
+        streak += 1
+        print("STREAK ", streak , "X")
+    return streak
 
 cont = True
-
+streak = 1
 oldNum = random.randint(0,100)
 print("Starting Number is ", oldNum)
 
 while(cont):
     playerGuess = inputValidation()
     cont, oldNum = guess(oldNum, playerGuess)
+    streak = streakCounter(streak, cont)
+    
 
+
+print("Your Streak is ", streak)
 print("Thank You for Playing The Game")
