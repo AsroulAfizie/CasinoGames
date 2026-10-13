@@ -43,16 +43,17 @@ def guess(oldNum, playerGuess, maxNum):
 
     print("New Number is ", newNum)
 
-    if(oldNum > newNum):
-        if playerGuess == "l":
-            return True, newNum
-        else:
-            return False, newNum
-    elif(oldNum < newNum):
-        if playerGuess == "h":
-            return True, newNum
-        else:
-            return False, newNum
+    if newNum > oldNum:
+        correct = (playerGuess == "h")
+    else:
+        correct = (playerGuess == "l")
+
+    if correct:
+        print("CORRECT!!!")
+    else:
+        print("WRONG!!!")
+
+    return correct, newNum
 
 def streakCounter(streak, guessRight):
     if guessRight:
