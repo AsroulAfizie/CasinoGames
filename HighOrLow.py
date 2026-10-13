@@ -13,7 +13,6 @@ def inputValidationContinuePlay():
             else:
                 return False
 
-
 def inputValidation():
     allowedAnswer = ["h", "l"]
     while True:
@@ -27,7 +26,7 @@ def inputValidation():
 def guess(oldNum, playerGuess):
     newNum = random.randint(0,100)
     while newNum == oldNum:
-        newNum = random.randint()
+        newNum = random.randint(0,100)
 
     print("New Number is ", newNum)
 
@@ -42,14 +41,18 @@ def guess(oldNum, playerGuess):
         else:
             return False, newNum
 
-# def streakPrint(streak, guessRight):
-#     if guessRight:
-#         streak += 1
-#         print("STREAK ", streak , "X")
-#     return streak
+def streakCounter(streak):
+    if guessRight:
+        streak += 1
+    return streak
+
+def highestStreakFunc(streak, highest):
+    if streak > highest:
+        highest = streak
+    return highest
 
 continuePlaying = True
-
+highestStreak = 1
 while(continuePlaying):
     #INITIALIZE
     guessRight = True
@@ -61,8 +64,11 @@ while(continuePlaying):
     while(guessRight):
         playerGuess = inputValidation()
         guessRight, oldNum = guess(oldNum, playerGuess)
+        streak = streakCounter(streak)
 
+    print("Your Streak is ", streak)
+    highestStreak = highestStreakFunc(streak, highestStreak)
     continuePlaying = inputValidationContinuePlay()
 
-# print("Your Streak is ", streak)
+print("Your Highest Streak is " , highestStreak)
 print("Thank You for Playing The Game")
