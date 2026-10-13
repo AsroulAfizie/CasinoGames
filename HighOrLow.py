@@ -1,9 +1,23 @@
 import random
 
-def inputValidation():
-    allowedAnswer = ["H", "h", "L", "l"]
+def inputValidationContinuePlay():
+    allowedAnswer = ["y", "n"]
     while True:
-        playerGuess = input("Guess High - H or Low - L : ")
+        answer = input("Continue Playing? y/n :").strip().lower()
+
+        if answer not in allowedAnswer:
+            print("Invalid Answer")
+        else:
+            if answer == "y":
+                return True
+            else:
+                return False
+
+
+def inputValidation():
+    allowedAnswer = ["h", "l"]
+    while True:
+        playerGuess = input("Guess High - H or Low - L : ").lower().strip()
 
         if playerGuess not in allowedAnswer:
             print("Please Valid Answer [H, h, L, l]")
@@ -28,21 +42,27 @@ def guess(oldNum, playerGuess):
         else:
             return False, newNum
 
-def streakCounter(streak, guessRight):
-    if guessRight:
-        streak += 1
-        print("STREAK ", streak , "X")
-    return streak
+# def streakPrint(streak, guessRight):
+#     if guessRight:
+#         streak += 1
+#         print("STREAK ", streak , "X")
+#     return streak
 
-cont = True
-streak = 1
-oldNum = random.randint(0,100)
-print("Starting Number is ", oldNum)
+continuePlaying = True
 
-while(cont):
-    playerGuess = inputValidation()
-    cont, oldNum = guess(oldNum, playerGuess)
-    streak = streakCounter(streak, cont)
+while(continuePlaying):
+    #INITIALIZE
+    guessRight = True
+    streak = 1
+    oldNum = random.randint(0,100)
+    print("Starting Number is ", oldNum)
 
-print("Your Streak is ", streak)
+    
+    while(guessRight):
+        playerGuess = inputValidation()
+        guessRight, oldNum = guess(oldNum, playerGuess)
+
+    continuePlaying = inputValidationContinuePlay()
+
+# print("Your Streak is ", streak)
 print("Thank You for Playing The Game")
