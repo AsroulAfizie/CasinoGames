@@ -1,5 +1,18 @@
 import random
 
+def inputValidationDifficulty():
+    while True:
+        answer = input("Choose Your Difficulty (E-Easy||M-Medium||H-Hard) :").lower().strip()
+
+        if answer == "e":
+            return 1000
+        elif answer == "m":
+            return 100
+        elif answer == "h":
+            return 10
+        else:
+            print("Invalid Input") 
+
 def inputValidationContinuePlay():
     allowedAnswer = ["y", "n"]
     while True:
@@ -16,32 +29,32 @@ def inputValidationContinuePlay():
 def inputValidation():
     allowedAnswer = ["h", "l"]
     while True:
-        playerGuess = input("Guess High - H or Low - L : ").lower().strip()
+        playerGuess = input("Guess High - h or Low - l : ").lower().strip()
 
         if playerGuess not in allowedAnswer:
-            print("Please Valid Answer [H, h, L, l]")
+            print("Please Valid Answer [h, l]")
         else:
             return playerGuess
 
-def guess(oldNum, playerGuess):
-    newNum = random.randint(0,100)
+def guess(oldNum, playerGuess, maxNum):
+    newNum = random.randint(0,maxNum)
     while newNum == oldNum:
-        newNum = random.randint(0,100)
+        newNum = random.randint(0,maxNum)
 
     print("New Number is ", newNum)
 
     if(oldNum > newNum):
-        if playerGuess == "L" or playerGuess == "l":
+        if playerGuess == "l":
             return True, newNum
         else:
             return False, newNum
     elif(oldNum < newNum):
-        if playerGuess == "H" or playerGuess == "h":
+        if playerGuess == "h":
             return True, newNum
         else:
             return False, newNum
 
-def streakCounter(streak):
+def streakCounter(streak, guessRight):
     if guessRight:
         streak += 1
     return streak
@@ -52,22 +65,26 @@ def highestStreakFunc(streak, highest):
     return highest
 
 continuePlaying = True
-highestStreak = 1
+highestStreak = 0
+
+maxNumber = inputValidationDifficulty()
+
+
 while(continuePlaying):
     print("================")
     print("  GAME START")
     print("================")
     #INITIALIZE
     guessRight = True
-    streak = 1
-    oldNum = random.randint(0,100)
+    streak = 0
+    oldNum = random.randint(0,maxNumber)
     print("Starting Number is ", oldNum)
 
     
     while(guessRight):
         playerGuess = inputValidation()
-        guessRight, oldNum = guess(oldNum, playerGuess)
-        streak = streakCounter(streak)
+        guessRight, oldNum = guess(oldNum, playerGuess, maxNumber)
+        streak = streakCounter(streak, guessRight)
 
     print("Your Streak is ", streak)
     highestStreak = highestStreakFunc(streak, highestStreak)
