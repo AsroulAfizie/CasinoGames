@@ -54,6 +54,9 @@ def highestStreakFunc(streak, highest):
 continuePlaying = True
 highestStreak = 1
 while(continuePlaying):
+    print("================")
+    print("  GAME START")
+    print("================")
     #INITIALIZE
     guessRight = True
     streak = 1
