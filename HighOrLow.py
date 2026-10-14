@@ -13,6 +13,15 @@ def inputValidationDifficulty():
         else:
             print("Invalid Input") 
 
+def inputValidationBet(balance):
+    while True:
+        answer = input("How Much You Want To Bet?")
+
+        if not answer.isdigit() or answer > balance or answer < 0:
+            print("Enter Value Between 0 and ", balance)
+        else:
+            return answer
+
 def inputValidationContinuePlay():
     allowedAnswer = ["y", "n"]
     while True:
@@ -26,13 +35,13 @@ def inputValidationContinuePlay():
             else:
                 return False
 
-def inputValidation():
-    allowedAnswer = ["h", "l"]
+def inputValidationPlayerGuess():
+    allowedAnswer = ["h", "l", "q"]
     while True:
-        playerGuess = input("Guess High - h or Low - l : ").lower().strip()
+        playerGuess = input("Guess High - h or Low - l or Quit - q : ").lower().strip()
 
         if playerGuess not in allowedAnswer:
-            print("Please Valid Answer [h, l]")
+            print("Please Valid Answer [h, l, q]")
         else:
             return playerGuess
 
@@ -67,11 +76,10 @@ def highestStreakFunc(streak, highest):
 
 continuePlaying = True
 highestStreak = 0
-
+balance = 1000
 maxNumber = inputValidationDifficulty()
 
-
-while(continuePlaying):
+while(continuePlaying and balance > 0):
     print("================")
     print("  GAME START")
     print("================")
@@ -81,9 +89,10 @@ while(continuePlaying):
     oldNum = random.randint(0,maxNumber)
     print("Starting Number is ", oldNum)
 
-    
     while(guessRight):
-        playerGuess = inputValidation()
+        playerGuess = inputValidationPlayerGuess()
+        if playerGuess == "q":
+            break
         guessRight, oldNum = guess(oldNum, playerGuess, maxNumber)
         streak = streakCounter(streak, guessRight)
 
